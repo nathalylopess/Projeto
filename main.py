@@ -9,3 +9,8 @@ tarefas:List[Tarefa]=[] # tipando a variávvel para receber apenas itens desse t
 @app.get("/tarefas/",response_model=List[Tarefa])
 def listar_tarefas():
     return tarefas
+
+@app.post("/tarefas/", response_model=Tarefa)
+def criar_tarefa(tarefa:Tarefa):
+    tarefas.append(tarefa)
+    return tarefa
