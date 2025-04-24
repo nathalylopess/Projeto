@@ -1,5 +1,8 @@
 # POAS - Mine Projeto CRUD
 
+## Observações
+Aon trabalhar com API, deve tomar cuidado em sincronizar (alguma coisa) 
+
 ## Comandos 
 
 ```bash
@@ -13,3 +16,4 @@ pip freeze > requirements.txt
 ```bash
 uvicorn main:app
 ```
+
