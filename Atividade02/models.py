@@ -17,7 +17,7 @@ class Emprestimo(BaseModel):
     livro_uuid: str
     pessoa_uuid: str
     data_emprestimo: str  
-    data_devolucao: str | None = None  # pode ser None enquanto não devolvido
+    data_devolucao: str | None = None 
 
 class Devolucao(BaseModel):
     pessoa_uuid:str
