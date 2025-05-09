@@ -41,7 +41,7 @@ def criar_pessoa(pessoa:Pessoa):
     pessoas.append(pessoa)
     return pessoa 
 
-#Realizar o empréstimo de um livro para um usuário, informando o UUID do usuário, o UUID do livro e a data do empréstimo.
+#Realizar o empréstimo de um livro para um usuário
 @app.post("/emprestimos/", response_model=Emprestimo)
 def criar_emprestimo(emprestimo: Emprestimo):
     livro_encontrado = None
@@ -73,18 +73,24 @@ def criar_emprestimo(emprestimo: Emprestimo):
 
     return emprestimo
 
-#Registrar a devolução de um livro, informando o UUID do usuário, o UUID do livro e a data da devolução.
+# Registrar a devolução de um livro
 @app.post("/devolucao/", response_model=Devolucao)
 def registrar_devolucao(devolucao_req: Devolucao):
-    pessoa = next((p for p in pessoas if p.uuid == devolucao_req.pessoa_uuid), None)
-    if not pessoa:
+    for pessoa in pessoas:
+        if pessoa.uuid == devolucao_req.pessoa_uuid:
+            pessoa = pessoa
+            break
+    else:
         raise HTTPException(status_code=404, detail="Pessoa não encontrada")
 
-    livro = next((l for l in livros if l.uuid == devolucao_req.livro_uuid), None)
-    if not livro:
+    for livro in livros:
+        if livro.uuid == devolucao_req.livro_uuid:
+            livro = livro
+            break
+    else:
         raise HTTPException(status_code=404, detail="Livro não encontrado")
 
-    if devolucao_req.livro_uuid not in pessoa.livros_emp:
+    if livro.uuid not in pessoa.livros_emp:
         raise HTTPException(status_code=400, detail="Livro não está emprestado por essa pessoa")
 
     livro.disponibilidade = True
@@ -93,12 +99,19 @@ def registrar_devolucao(devolucao_req: Devolucao):
     devolucao.append(devolucao_req)
     return devolucao_req
 
-#Listar todos os livros atualmente emprestados por um usuário, identificado pelo seu UUID. 
+# Listar livros emprestados por uma pessoa
 @app.get("/pessoas/{uuid}/livros_emprestados/", response_model=List[Livro])
 def listar_livros_emprestados(uuid: str):
-    pessoa = next((p for p in pessoas if p.uuid == uuid), None)
-    if not pessoa:
+    for pessoa in pessoas:
+        if pessoa.uuid == uuid:
+            pessoa = pessoa
+            break
+    else:
         raise HTTPException(status_code=404, detail="Pessoa não encontrada")
 
-    livros_emprestados = [livro for livro in livros if livro.uuid in pessoa.livros_emp]
+    livros_emprestados = []
+    for livro in livros:
+        if livro.uuid in pessoa.livros_emp:
+            livros_emprestados.append(livro)
+
     return livros_emprestados
