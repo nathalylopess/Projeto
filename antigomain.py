@@ -1,25 +1,19 @@
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException
 from models import Tarefa
 from typing import List
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
 
 templates = Jinja2Templates(directory="templates")
 
 app = FastAPI() # a partir dele serão criadas as rotas
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 tarefas:List[Tarefa]=[] # tipando a variávvel para receber apenas itens desse tipo
 
-
-@app.get("/", response_class=HTMLResponse)
-async def list_tarefa(request: Request):
-    return templates.TemplateResponse("listarTarefa.html", {"request": request, "tarefas": tarefas})
-
-@app.get("/cadastrar-tarefas", response_class=HTMLResponse)
-async def cad_tarefa(request: Request):
-    return templates.TemplateResponse("cadastrar_tarefa.html", {"request": request, "tarefas": tarefas})
+@app.get("/tarefas/",response_model=List[Tarefa], method=['GET', 'POST'])
+def listar_tarefas():
+    if method == POST:
+        return render_template('listar_tarefa.html')
+    return tarefas
 
 @app.get("/tarefas/{id}", response_model=Tarefa)
 def listar_tarefa(id:int):

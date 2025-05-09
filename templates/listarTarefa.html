@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}Listar Tarefas{% endblock %}
+
+{% block content %}
+<div class="box">
+    <h2>Listar Tarefas</h2>
+    <ol>
+        {%for tarefa in tarefas%}
+            <li>{{tarefa}}</li>
+        {%endfor%}
+    </ol>
+    
+</div>
+{% endblock %}
