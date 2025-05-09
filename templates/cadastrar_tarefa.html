@@ -1,17 +1,39 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Tarefas</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Gerenciador de Tarefas</h1>
+    </header>
+    <nav>
+        
+        <a href="">Listar Tarefas</a>
+        <a href="">Cadastrar Tarefas</a>
+        
+    </nav>
+    <main>
+        <div class="content">
+            <div class="box">
+                <h2>Insira os dados</h2>
+                <input type="number" placeholder="ID">
+                <input type="text" placeholder="descrição">
+                <input type="number" placeholder="prioridade">
+                <select name="boleano" id="">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>© 2025 Tarefas</p>
+    </footer>
+</body>
+</html>
 
-{% block title %}Cadastrar Tarefas{% endblock %}
-
-{% block content %}
-<div class="box">
-    
-    <h2>Insira os dados</h2>
-    <input type="number" placeholder="ID">
-    <input type="text" placeholder="descrição">
-    <input type="number" placeholder="prioridade">
-    <select name="boleano" id="">
-        <option value="true">True</option>
-        <option value="false">False</option>
-    </select>
-</div>
-{% endblock %}
+Cadastrarlistar
