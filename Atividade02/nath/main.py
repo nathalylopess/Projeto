@@ -65,7 +65,6 @@ def criar_emprestimo(emprestimo: Emprestimo):
     if not pessoa_encontrada:
         raise HTTPException(status_code=404, detail="Pessoa não encontrada")
 
-    # Atualizar status do livro e da pessoa
     livro_encontrado.disponibilidade = False
     pessoa_encontrada.livros_emp.append(livro_encontrado.uuid)
  
