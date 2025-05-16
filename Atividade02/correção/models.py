@@ -3,7 +3,7 @@ from typing import List
 from datetime import date
 
 class Livro(BaseModel):
-    uuid: str
+    uuid:str
     titulo:str
     autor:str
     ano:str
