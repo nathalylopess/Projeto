@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliotecas</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <label for="nome">Nome Biblioteca</label>
+    <input type="text" name="nome">
+    <input type="submit" value="Enviar" onclick="cadastrar_biblioteca();">
+    
+
+    <script>
+        function cadastrar_biblioteca(){
+            const dados = encodeURIComponent($('input[name="nome"]').val());
+            $.ajax({
+                url:"http://127.0.0.1:8000/bibliotecas/?nome=" + dados,
+                type: "POST",
+                success: function(){
+                    alert("Cadastrado com sucesso");
+                },
+                error: function(err){
+                    alert("Erro");
+                }
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 # POAS - Mine Projeto CRUD
 
 ## Observações
-Aon trabalhar com API, deve tomar cuidado em sincronizar (alguma coisa) 
+Ao trabalhar com API, deve tomar cuidado em sincronizar (alguma coisa) 
 
 ## Comandos 
 
