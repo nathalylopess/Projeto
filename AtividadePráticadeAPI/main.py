@@ -29,3 +29,13 @@ def criar_livro(livro:Livro):
     return livro
     raise HTTPException(404,"Não localizado")
 
+# Criando a rota abaixo para editar um livro
+@app.put("/livros/{titulo}",response_model=Livro)
+def editar_livro(titulo:str, novo_livro:Livro):
+    for id, livro in enumerate(livros):
+        if livro.titulo == titulo:
+            livros[id] = novo_livro
+            return novo_livro
+    raise HTTPException(404,"Não localizado")
+    
+
